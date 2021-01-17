@@ -11,38 +11,46 @@ import {
 } from 'semantic-ui-react'
 import Container from '@material-ui/core/Container';
 import "./form.css"
+import { usePosition } from 'use-position';
 
 
 
 class PersonalForm extends Component {
-    state = {
-        firstName: "",
-        lastName: "",
-        gender: "",
-        dob: "",
-        occupation: "",
-        email: "",
-        password: "",
-        longitude: "0",
-        latitude: "0",
-        permission: "1",
-        vaccinated: "false",
-        age: ""
-    }
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.state = {
+            firstName: "",
+            lastName: "",
+            gender: "",
+            dob: "",
+            occupation: "",
+            email: "",
+            password: "",
+            latitude:  "",
+            longitude: "",
+            permission: "1",
+            vaccinated: "false",
+            age: ""
+        }
+      }
+
 
     handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
     handleSubmit = () =>{
+        this.state.latitude = this.props.latitude;
+        this.state.longitude = this.props.longitude;
         this.state.vaccinated = false;
         var d = new Date();
         var now = d.getTime();
         console.log(now);
         var dobTime = Date.parse(this.state.dob);
         console.log(dobTime);
-        
+        console.log(this.state)
         this.state.age = Math.floor((now - dobTime) / 31536000 / 1000);
 
-        const { age, occupation, gender, dob, longitude, latitude, firstName, lastName, password, email, permission, vaccinated } = this.state
+        const { age, occupation, gender, dob, latitude, longitude, firstName, lastName, password, email, permission, vaccinated } = this.state
         axios.post('http://localhost:3600/users/register', this.state)
             .then(response =>{
                 console.log(this.state)
@@ -54,7 +62,7 @@ class PersonalForm extends Component {
             alert("submitted")
     }
     render() {
-        const { age, occupation, gender, dob, longitude, latitude, firstName, lastName, password, email, permission } = this.state
+        const { age, occupation, gender, dob, latitude, longitude, firstName, lastName, password, email, permission } = this.state
         return (
             <Container maxWidth="md">
                 <p className="title">Personal Information Form</p>

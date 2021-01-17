@@ -8,4 +8,8 @@ exports.routesConfig = function (app) {
     app.get('/heatmap/candidates', [
         heatmapController.getEligible
     ]);
+
+    app.get('/heatmap/gen/:quantity', [
+        heatmapController.generateData
+    ]);
 };

@@ -6,8 +6,11 @@ function Home() {
     return (
       <div>
           <header className="header">
-            <h1>VACCINE-19 <Button variant="contained" color="primary">Sign Up For A Vaccine</Button></h1>
+            <h1>VACCINE-19 </h1>
           </header>
+          <body className = 'button1'>
+            <Button variant="contained" color="primary">Sign Up For A Vaccine</Button>
+          </body>
           <body className="body1">
             <p >Making the distribution of </p>
             <p >vaccines simpler than ever. </p>

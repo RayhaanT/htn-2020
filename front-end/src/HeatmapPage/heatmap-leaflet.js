@@ -19,7 +19,7 @@ const columns = [
 
 ];
 
-const rows = [
+const rows = [ 
     { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
     { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
     { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
@@ -48,7 +48,7 @@ const rows = [
        
           
           
-        });
+        }, []);
 
         return (
             <div>

@@ -18,6 +18,20 @@ export default function Login() {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
 
+    useEffect(() => {
+        // Check if user is already logged in validly
+        let token = localStorage.getItem('authToken');
+        axios.get('http://localhost:3600/users/get/1', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(response => {
+                history.push("/heatmap");
+            }).catch(error => {
+            })
+
+    });
 
     return (
         <div>
@@ -25,24 +39,25 @@ export default function Login() {
                 <p className="title">ADMIN LOGIN</p>
                 <Form onSubmit={() => {
 
-                    axios.post('https://webhook.site/17b313ea-a5dd-4f13-b8dc-d56cc21c67e2', {id, password})
+                    axios.post('http://localhost:3600/auth', {email: id, password: password})
                     .then(response =>{
-                        console.log(this.state)
-                        console.log(response)
-                        
+                        console.log(response);
+                        if(response.data.accessToken) {
+                            localStorage.setItem('authToken', response.data.accessToken);
+                            history.push("/heatmap");
+                        }
+                        else {
+                            alert("Invalid credentials");
+                        }
                         
                     }).catch(error =>{
-                        console.log(error)
+                        console.log(error);
                     })
-
-                    alert("submitted");
-                    history.push("/heatmap");
-                
                 }}>
                     
                     <Form.Field
                         control={Input}
-                        label='Government ID'
+                        label='Government Email'
                         placeholder='27 digits'
                         name='id'
                         value={id}

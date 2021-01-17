@@ -7,7 +7,7 @@ import 'leaflet/dist/leaflet.css';
 import { DataGrid } from '@material-ui/data-grid';
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 80 },
+  { field: 'id', headerName: 'ID', width: 200 },
   { field: 'firstName', headerName: 'First name', width: 110 },
   { field: 'lastName', headerName: 'Last name', width: 110 },
   {
@@ -19,35 +19,36 @@ const columns = [
 
 ];
 
-const rows = [ 
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-  ];
+let rows = [];
     function Heatmap() {
         const [addressPoints, setAddressPoints] = useState(0);
+        const [candidates, setCandidates] = useState(0);
 
-        useEffect (() => {
-          const result = axios(
-            'http://localhost:3600/heatmap'
-          ).then(response =>{
+        useEffect (async () => {
+            console.log("start");
+            let token = localStorage.getItem('authToken'); 
+            const users = await axios.get('http://localhost:3600/users/get/40', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            console.log(users);
+            setCandidates(users.data);
+            rows = users.data;
+
+            const result = axios(
+              'http://localhost:3600/heatmap'
+            ).then(response =>{
                 let points = [];
                 response.data.forEach(element => {
                     points.push([element.latitude, element.longitude, element.priority]);
                 });
                 setAddressPoints(points);
             }).catch(error =>{
-                console.log(error)
+                console.log(error);
             });
        
-          
-          
         }, []);
 
         return (

@@ -13,6 +13,7 @@ const bodyParser = require('body-parser');
 /** Import all the routes created by us here */
 const UsersRouter = require('./users/routes.config');
 const AuthRouter = require('./authorization/routes.config');
+const HeatRouter = require('./heatmap/routes.config');
 
 // Listens to all requests and adds CORS headers if not available
 app.use(function (req, res, next) {
@@ -38,6 +39,7 @@ app.use(bodyParser.json());
 // Parse the url and match with configured routes
 UsersRouter.routesConfig(app);
 AuthRouter.routesConfig(app);
+HeatRouter.routesConfig(app);
 
 console.log(config.port);
 

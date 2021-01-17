@@ -1,11 +1,11 @@
-const UsersController = require('./controllers/heatmap.controller');
-const config = require('../common/config/env.config');
-
-const ADMIN = config.permissionLevels.ADMIN;
-const NORMAL = config.permissionLevels.NORMAL_USER;
+const heatmapController = require('./controllers/heatmap.controller');
 
 exports.routesConfig = function (app) {
     app.get('/heatmap', [
-        UsersController.register
+        heatmapController.getData
+    ]);
+
+    app.get('/heatmap/candidates', [
+        heatmapController.getEligible
     ]);
 };

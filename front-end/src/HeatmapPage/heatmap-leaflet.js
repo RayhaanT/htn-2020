@@ -23,7 +23,7 @@ import 'leaflet/dist/leaflet.css';
        
           
           
-        }, []);
+        });
 
         return (
             <div>

@@ -5,6 +5,8 @@ import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import HeatmapLayer from '../HeatmapLayer';
 import 'leaflet/dist/leaflet.css';
 import { DataGrid } from '@material-ui/data-grid';
+import Button from '@material-ui/core/Button';
+import './heatmap.css';
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 200 },
@@ -70,6 +72,11 @@ let rows = [];
 
                 <div style={{ height: 400, width: '100%' }}>
                     <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection />
+                </div>
+                <div className="email-button">
+                    <Button variant="contained" color="secondary" onClick={() => {alert("Emails sent to vaccine candidates.")}}>
+                        Send Emails
+                    </Button>
                 </div>
             </div>
         );

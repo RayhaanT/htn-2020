@@ -1,5 +1,5 @@
 # Logs
-
+cockroach-data/
 logs
 *.log
 npm-debug.log*

@@ -31,24 +31,4 @@ pool.query(
          vaccinated BOOL);"
 );
 
-// pool.connect(function (err, client, done) {
-
-//     // Close communication with the database and exit.
-//     var finish = function () {
-//         done();
-//         process.exit();
-//     };
-
-//     if (err) {
-//         console.error('could not connect to cockroachdb', err);
-//         finish();
-//     }
-
-//     // Set up users table
-//     client.query(
-//         );
-    
-//     // finish();
-// });
-
 exports.pool = pool;

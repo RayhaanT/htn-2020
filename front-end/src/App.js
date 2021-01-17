@@ -2,6 +2,7 @@ import './App.css';
 import Home from './HomePage/home.js';
 import FormPage from './FormPage/formpage.js';
 import Heatmap from './HeatmapPage/heatmap-leaflet.js';
+import Login from './LoginPage/login.js'
 
 import {
   BrowserRouter as Router,
@@ -26,6 +27,10 @@ function App() {
 
           <Route path="/heatmap">
             <Heatmap />
+          </Route>
+
+          <Route path="/login">
+            <Login />
           </Route>
 
           <Route path="/">

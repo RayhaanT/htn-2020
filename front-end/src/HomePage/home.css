@@ -2,17 +2,19 @@
     color: rgb(104, 94, 94);
     background-color: "white";
     padding: 15px;
+
     font: 'Poppins', sans-serif;
     font-size: 1.5em;
 }
 
 .vaccineTitle{
     float:left;
+    margin-bottom: 14px;
 }
 .main{
     background-color: #282c34;
     width: 100%;
-    min-height: 100vh;
+    min-height: 93vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,7 +23,7 @@
     color: white;
 }
 
-.signUp{
+.login{
     float:right;
 }
 .body1 {

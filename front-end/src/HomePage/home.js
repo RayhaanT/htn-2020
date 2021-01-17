@@ -12,8 +12,8 @@ function Home() {
               <h1>VACCINE-19 </h1>
             </div>
 
-            <div className="signUp">
-              <Button variant="contained" color="primary">Sign Up</Button>
+            <div className="login">
+              <Button href="http://localhost:3000/login" variant="contained" color="primary">Admin Login</Button>
             </div>
           </header>
 
@@ -21,7 +21,7 @@ function Home() {
           <div className="main">
           <img src = {logo1}/>
             <p >Making the distribution of vaccines simpler than ever. </p>
-            <Button href="https://localhost:3000/heatmap"variant="contained" color="primary" size="large">View Heat Map Data</Button>
+            <Button href="http://localhost:3000/form" variant="contained" color="primary" size="large">VACCINE SIGN UP</Button>
         
             
           </div>

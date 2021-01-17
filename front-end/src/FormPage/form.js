@@ -39,8 +39,8 @@ class PersonalForm extends Component {
     handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
     handleSubmit = () =>{
-        this.setState({latitude: this.props.latitude});
-        console.log(this.props.longitude);
+        this.state.latitude = this.props.latitude;
+        this.state.longitude = this.props.longitude;
         this.state.vaccinated = false;
         var d = new Date();
         var now = d.getTime();

@@ -1,5 +1,5 @@
 .total {
-    text-align: center;
+    text-align: left;
 }
 
 .body {
@@ -7,8 +7,8 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items:  left !important;
+    justify-content: !important left;
     font-size: calc(10px + 2vmin);
     color: white;
 }

@@ -1,17 +1,24 @@
 import React from 'react';
 import './home.css'
-
+import Button from '@material-ui/core/Button';
+import logo1 from '../Vaccine19Logo.png'
 function Home() {
     return (
-      <div className="total">
-          <header>
-              <h2>VACCINE PRIORITIZATION - HTN 2020++</h2>
+      <div>
+          <header className="header">
+            <h1>VACCINE-19 </h1>
           </header>
-
-          <body className="body">
-            <p>HOME PAGE</p>
+          <body className = 'button1'>
+            <Button variant="contained" color="primary">Sign Up For A Vaccine</Button>
           </body>
-          
+          <body className="body1">
+            <p >Making the distribution of </p>
+            <p >vaccines simpler than ever. </p>
+            <Button variant="contained" color="primary" size="large">View Heat Map Data</Button>
+          </body>
+          <body className='image'>
+          <img src = {logo1} />
+          </body>
       </div>
     );
   }

@@ -6,4 +6,4 @@ function Heatmap() {
     );
   }
   
-  export default Heatmap;
+  export default Heatmap; 

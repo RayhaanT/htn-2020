@@ -23,16 +23,27 @@ class PersonalForm extends Component {
         occupation: "",
         email: "",
         password: "",
-        longitude: "",
-        latitude: "",
-        permission: "1"
+        longitude: "0",
+        latitude: "0",
+        permission: "1",
+        vaccinated: "false",
+        age: ""
     }
 
     handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
     handleSubmit = () =>{
-        const { age, occupation, gender, dob, longitude, latitude, firstName, lastName, password, email, permission } = this.state
-        axios.post('https://webhook.site/17b313ea-a5dd-4f13-b8dc-d56cc21c67e2', this.state)
+        this.state.vaccinated = false;
+        var d = new Date();
+        var now = d.getTime();
+        console.log(now);
+        var dobTime = Date.parse(this.state.dob);
+        console.log(dobTime);
+        
+        this.state.age = Math.floor((now - dobTime) / 31536000 / 1000);
+
+        const { age, occupation, gender, dob, longitude, latitude, firstName, lastName, password, email, permission, vaccinated } = this.state
+        axios.post('http://localhost:3600/users/register', this.state)
             .then(response =>{
                 console.log(this.state)
                 console.log(response)
@@ -86,7 +97,7 @@ class PersonalForm extends Component {
                     <Form.Field
                         control={Input}
                         label='Date of Birth'
-                        placeholder='dd/mm/yy'
+                        placeholder='dd/mm/yyyy'
                         name='dob'
                         value={dob}
                         onChange={this.handleChange}

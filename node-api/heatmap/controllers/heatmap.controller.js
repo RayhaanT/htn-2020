@@ -5,7 +5,6 @@ const crypto = require('crypto');
 exports.getData = (req, res) => {
     HeatModel.getAllCoords()
         .then((results) => {
-            console.log(results);
             res.status(200).send(results.rows);
         })
         .catch((err) => {

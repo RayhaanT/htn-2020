@@ -1,6 +1,43 @@
 const UserModel = require('../models/users.model');
 const crypto = require('crypto');
 
+// nurse, doctor, teacher, police, fireperson, 
+
+const priorityOccupations = [
+    {
+        name: "nurse",
+        priority: 10
+    },
+    {
+        name: "doctor",
+        priority: 10
+    },
+    {
+        name: "teacher",
+        priority: 7
+    },
+    {
+        name: "police",
+        priority: 7
+    },
+    {
+        name: "firefighter",
+        priority: 8
+    },
+    {
+        name: "retail",
+        priority: 2
+    },
+    {
+        name: "grocer",
+        priority: 4
+    },
+    {
+        name: "pharmacist",
+        priority: 3
+    }
+];
+
 exports.register = (req, res) => {
     let salt = crypto.randomBytes(16).toString('base64');
     req.body.salt = salt;
@@ -8,6 +45,14 @@ exports.register = (req, res) => {
     req.body.hash = hash;
     req.body.name = req.body.firstName + " " + req.body.lastName;
     req.body.priority = req.body.age;
+    req.body.occupation = req.body.occupation.toLowerCase();
+
+    priorityOccupations.forEach(element => {
+        if(element.name == req.body.occupation) {
+            req.body.priority += element.priority;
+        }
+    });
+
     UserModel.createUser(req.body)
         .then((result) => {
             res.status(201).send({ id: result.rows[0].id });
@@ -56,3 +101,17 @@ exports.removeById = (req, res) => {
             res.status(400).send(err);
         });
 };
+
+exports.getNextX = (req, res) => {
+    UserModel.getByPriorityOrder()
+        .then((result) => {
+            candidates = [];
+            for(i = 0; i < req.params.quantity; i++) {
+                candidates.push(result.rows[i]);
+            }
+            res.status(200).send(candidates);
+        })
+        .catch((err) => {
+            res.status(400).send(err);
+        });
+}

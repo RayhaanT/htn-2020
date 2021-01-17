@@ -27,4 +27,9 @@ exports.routesConfig = function (app) {
         PermissionMiddleware.requirePermissionLevel(NORMAL),
         UsersController.removeById
     ]);
+    app.get('/users/get/:quantity', [
+        ValidationMiddleware.requireValidJWT,
+        PermissionMiddleware.requirePermissionLevel(ADMIN),
+        UsersController.getNextX
+    ]);
 };

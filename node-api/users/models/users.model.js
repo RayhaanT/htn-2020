@@ -34,5 +34,8 @@ exports.removeById = (userId) => {
 
 exports.vaccinateUser = (userId) => {
     return pool.query("UPDATE users SET vaccinated = true WHERE id = $1", [userId]);
-}
+};
 
+exports.getByPriorityOrder = () => {
+    return pool.query("SELECT * FROM users ORDER BY priority DESC");
+};

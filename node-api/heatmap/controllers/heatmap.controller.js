@@ -23,7 +23,7 @@ exports.getEligible = (req, res) => {
 };
 
 var sampleUser = {
-    name: "Rayhaan Tanweer",
+    name: "Testing Data",
     occupation: "None",
     permission: 1,
     vaccinated: false
@@ -32,7 +32,7 @@ var sampleUser = {
 const waterlooLat = 43.47211;
 const waterlooLon = -80.54491;
 const maxInterHotSpotVariance = 0.08;
-const maxIntraHotSpotVariance = 0.02;
+const maxIntraHotSpotVariance = 0.01;
 
 function randomEmail(length) {
     var email = '';
@@ -46,11 +46,15 @@ function randomEmail(length) {
 
 function getOffset(max) {
     let neg = Math.random();
-    let offset = Math.pow(Math.random(), 2) * max;
+    let offset = Math.pow(Math.random(), 3) * max;
     if(neg > 0.5) {
         return offset;
     }
     return -offset;
+}
+
+function randomAngle() {
+    return Math.random() * 2 * Math.PI;
 }
 
 exports.generateData = (req, res) => {
@@ -58,12 +62,12 @@ exports.generateData = (req, res) => {
     sampleUser.salt = salt;
     let hash = crypto.createHmac('sha512', salt).update("passw0rd").digest("base64");
     sampleUser.hash = hash;
-
+ 
     for (i = 0; i < req.params.quantity; i++) {
-        let hotSpotLatOffset = getOffset(maxInterHotSpotVariance);
-        let hotSpotLonOffset = getOffset(maxInterHotSpotVariance);
-        var hotSpotLat = waterlooLat + hotSpotLatOffset;
-        var hotSpotLon = waterlooLon + hotSpotLonOffset;
+        let hotSpotOffset = getOffset(maxInterHotSpotVariance);
+        let angle = randomAngle();
+        var hotSpotLat = waterlooLat + (hotSpotOffset * Math.cos(angle));
+        var hotSpotLon = waterlooLon + (hotSpotOffset * Math.sin(angle));
 
         let points = 500;
         if(req.params.quantity - i < 500) {
@@ -72,17 +76,17 @@ exports.generateData = (req, res) => {
         for(j = 0; j < points; j++) {
             sampleUser.age = Math.floor(Math.random() * 80);
             sampleUser.email = randomEmail(Math.random() * 20);
-            sampleUser.latitude = hotSpotLat + getOffset(maxIntraHotSpotVariance);
-            sampleUser.longitude = hotSpotLon + getOffset(maxIntraHotSpotVariance);
-            sampleUser.priority = sampleUser.age;
+            hotSpotOffset = getOffset(maxIntraHotSpotVariance);
+            angle = randomAngle();
+            sampleUser.latitude = hotSpotLat + (hotSpotOffset * Math.cos(angle));
+            sampleUser.longitude = hotSpotLon + (hotSpotOffset * Math.sin(angle));
+            sampleUser.priority = sampleUser.age / 10;
             
             UserModel.createUser(sampleUser)
                 .then((result) => {
                     
                 })
                 .catch((err) => {
-                    res.status(400).send(err);
-                    return;
                 });
 
         }

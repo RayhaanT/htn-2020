@@ -5,7 +5,7 @@ function Home() {
     return (
       <div className="total">
           <header>
-              <h2>HTN 2020++ VACCINE</h2>
+              <h2>VACCINE PRIORITIZATION - HTN 2020++</h2>
           </header>
 
           <body className="body">

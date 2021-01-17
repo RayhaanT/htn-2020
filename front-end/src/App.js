@@ -1,6 +1,6 @@
 import './App.css';
 import Home from './HomePage/home.js';
-import Form from './FormPage/form.js';
+import PersonalForm from './FormPage/form.js';
 import Heatmap from './HeatmapPage/heatmap.js';
 
 import {
@@ -21,7 +21,7 @@ function App() {
         <Switch>
 
           <Route path="/form">
-            <Form />
+            <PersonalForm />
           </Route>
 
           <Route path="/heatmap">

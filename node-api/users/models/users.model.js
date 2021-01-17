@@ -1,54 +1,5 @@
 const pool = require('../../common/services/cockroach.service').pool;
 
-// const userSchema = new Schema({
-//     firstName: String,
-//     lastName: String,
-//     age: {
-//         type: Number,
-//         required: true
-//     },
-//     occupation: {
-//         type: String,
-//         required: true
-//     },
-//     longitude: {
-//         type: Number,
-//         required: true
-//     },
-//     latitude: {
-//         type: Number,
-//         required: true
-//     },
-//     email: {
-//         type: String,
-//         unique: true,
-//         required: true
-//     },
-//     hash: String,
-//     salt: String,
-//     permission: Number,
-//     priority: Number,
-//     vaccinated: {
-//         type: Boolean,
-//         default: false
-//     }
-// });
-
-// userSchema.virtual('id').get(function () {
-//     return this._id.toHexString();
-// });
-
-// // Ensure virtual fields are serialised.
-// userSchema.set('toJSON', {
-//     virtuals: true
-// });
-
-// userSchema.findById = function (cb) {
-//     return this.model('Users').find({id: this.id}, cb);
-// };
-
-// const User = mongoose.model('Users', userSchema);
-
 exports.findByEmail = (email) => {
     return pool.query('SELECT * FROM users WHERE email = $1', [email]);
 };
@@ -57,7 +8,7 @@ exports.findById = (id) => {
     return pool.query('SELECT * FROM users WHERE id = $1', [id]);
 };
 
-exports.createUser = (userData, res) => {
+exports.createUser = (userData) => {
     let age = userData.age;
     let occupation = userData.occupation;
     let longitude = userData.longitude;

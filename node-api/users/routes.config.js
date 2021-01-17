@@ -16,15 +16,15 @@ exports.routesConfig = function (app) {
         PermissionMiddleware.requireSameUser,
         UsersController.getById
     ]);
-    app.patch('/users/:userId', [
+    app.post('/users/vaccinate/:userId', [
         ValidationMiddleware.requireValidJWT,
         PermissionMiddleware.requirePermissionLevel(NORMAL),
         PermissionMiddleware.requireSameUser,
-        UsersController.patchById
+        UsersController.vaccinateById
     ]);
     app.delete('/users/:userId', [
         ValidationMiddleware.requireValidJWT,
-        PermissionMiddleware.requirePermissionLevel(ADMIN),
+        PermissionMiddleware.requirePermissionLevel(NORMAL),
         UsersController.removeById
     ]);
 };

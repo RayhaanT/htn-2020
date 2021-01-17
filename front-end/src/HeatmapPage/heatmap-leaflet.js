@@ -10,11 +10,13 @@ import 'leaflet/dist/leaflet.css';
  
         useEffect (() => {
           const result = axios(
-            'https://jsonplaceholder.typicode.com/users'
+            'http://localhost:3600/heatmap'
           ).then(response =>{
-                console.log(response)
-                setAddressPoints(response.data);
-                console.log(addressPoints);
+                let points = [];
+                response.data.forEach(element => {
+                    points.push([element.latitude, element.longitude, element.priority]);
+                });
+                setAddressPoints(points);
             }).catch(error =>{
                 console.log(error)
             });

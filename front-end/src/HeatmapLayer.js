@@ -108,7 +108,6 @@ export default withLeaflet(class HeatmapLayer extends MapLayer {
     this._el.style[transformProp] = '50% 50%';
     this._el.width = mapSize.x;
     this._el.height = mapSize.y;
-    console.log(this._el);
 
 
     const el = this._el;
@@ -313,9 +312,6 @@ export default withLeaflet(class HeatmapLayer extends MapLayer {
     );
 
     const cellSize = r / 2;
-    console.log(this.props);
-    console.log(this.props.leaflet);
-    console.log(this.props.leaflet.map);
     const panePos = this.props.leaflet.map._getMapPanePos();
     const offsetX = panePos.x % cellSize;
     const offsetY = panePos.y % cellSize;

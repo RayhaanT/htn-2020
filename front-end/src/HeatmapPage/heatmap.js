@@ -1,4 +1,4 @@
-function Heatmap() {
+function meatmap() {
     return (
       <div>
         <p>HEATMAP</p>
@@ -6,4 +6,4 @@ function Heatmap() {
     );
   }
   
-  export default Heatmap; 
+  export default meatmap;

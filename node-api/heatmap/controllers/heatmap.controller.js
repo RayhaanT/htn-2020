@@ -64,14 +64,8 @@ exports.generateData = (req, res) => {
     sampleUser.hash = hash;
  
     for (i = 0; i < req.params.quantity; i++) {
-        // let hotSpotLatOffset = getOffset(maxInterHotSpotVariance);
-        // let hotSpotLonOffset = getOffset(maxInterHotSpotVariance);
         let hotSpotOffset = getOffset(maxInterHotSpotVariance);
-        let zero = 0;
         let angle = randomAngle();
-        console.log(angle);
-        console.log(hotSpotOffset);
-        console.log(hotSpotOffset * Math.cos(angle));
         var hotSpotLat = waterlooLat + (hotSpotOffset * Math.cos(angle));
         var hotSpotLon = waterlooLon + (hotSpotOffset * Math.sin(angle));
 
